@@ -7,12 +7,12 @@ const ToDoItem = (props) => {
 
     return (
         <div className="ToDoItem">
-            <button className="ToDoItem-Check" onClick={() => changeItem(item.id)}>
-                <Icon disabled name='check' />
+            <button style={item.checked ? {cursor: 'not-allowed'} : null } className="ToDoItem-Check" onClick={() => changeItem(item.id)}>
+                <Icon disabled={item.checked} name='check circle outline' />
             </button>
             <p style={item.checked ? {textDecoration: 'line-through'} : null } className="ToDoItem-Text">{item.name}</p>
             <button className="ToDoItem-Delete" onClick={() => deleteItem(item.id)}>
-                -
+                <Icon name='trash alternate outline' />
             </button>
         </div>
     );

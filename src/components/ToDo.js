@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
-// import InputTask from './InputTask'
+import React, { useState, useEffect } from 'react'
 import ToDoItem from "./ToDoItem";
 import "./ToDo.css";
+import "./extra/ErrorMessage"
 import Logo from "../assets/logo192.png";
+import {Icon, Label} from "semantic-ui-react";
 
 function ToDo() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
   const [toDo, setToDo] = useState("");
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,9 +20,12 @@ function ToDo() {
 
   async function createNewToDoItem() {
     if (!toDo) {
-      alert("Please enter a todo!");
+      setShowError(true);
       return;
     }
+
+    setShowError(false);
+
     const response = await fetch('http://localhost:4000/api/task', {
       method: 'POST',
       headers: {
@@ -87,9 +92,15 @@ function ToDo() {
         </div>
 
         <div className="ToDoInput">
-          <input className="ToDoItem-Input" type="text" value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
+
+          <input placeholder="Task" className="ToDoItem-Input" type="text" value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
+          { showError &&
+            <Label basic color='red' pointing="left">
+              Please enter a value
+            </Label>
+          }
           <button className="ToDo-Add" onClick={createNewToDoItem}>
-            +
+            <Icon name="plus" />
           </button>
         </div>
       </div>
