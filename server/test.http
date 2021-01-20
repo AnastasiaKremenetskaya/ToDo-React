@@ -1,0 +1,32 @@
+GET http://localhost:4000/api/task
+
+###
+
+GET http://localhost:4000/api/task/5
+
+###
+
+POST http://localhost:4000/api/task
+Content-Type: application/json
+
+{
+    "name": "Just do it",
+    "checked": true
+}
+
+###
+
+PATCH http://localhost:4000/api/task/5
+Content-Type: application/json
+
+{
+    "name": "Some task"
+}
+
+###
+
+DELETE  http://localhost:4000/api/task/2
+
+###
+
+GET http://localhost:4000/dogs/
