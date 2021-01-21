@@ -1,5 +1,4 @@
 import React from "react";
-import "./ToDoItem.css";
 import { Icon } from 'semantic-ui-react'
 
 const ToDoItem = (props) => {

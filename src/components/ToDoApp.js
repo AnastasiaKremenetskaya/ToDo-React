@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import ToDoItem from "./ToDoItem";
-import "./ToDo.css";
-import "./extra/ErrorMessage"
+import "./ToDoList"
 import Logo from "../assets/logo192.png";
-import {Icon, Label} from "semantic-ui-react";
+import {Label} from "semantic-ui-react";
+import ToDoList from "./ToDoList";
 
-function ToDo() {
+function ToDoApp() {
   const [tasks, setTasks] = useState([]);
   const [toDo, setToDo] = useState("");
   const [showError, setShowError] = useState(false);
@@ -85,11 +85,11 @@ function ToDo() {
       <img className="Logo" src={Logo} alt="React logo" />
       <h1 className="ToDo-Header">React To Do</h1>
       <div className="ToDo-Container">
-        <div className="ToDo-Content">
-          {tasks.map((item) => {
-            return <ToDoItem key={item.id} item={item} deleteItem={deleteItem} changeItem={changeItem} />;
-          })}
-        </div>
+
+        <ToDoList
+          tasks={tasks}
+          renderItem={(item) => <ToDoItem item={item} changeItem={changeItem} deleteItem={deleteItem} />}
+        />
 
         <div className="ToDoInput">
 
@@ -100,7 +100,7 @@ function ToDo() {
             </Label>
           }
           <button className="ToDo-Add" onClick={createNewToDoItem}>
-            <Icon name="plus" />
+            +
           </button>
         </div>
       </div>
@@ -108,4 +108,4 @@ function ToDo() {
   );
 }
 
-export default ToDo;
+export default ToDoApp;
