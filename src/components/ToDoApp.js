@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ToDoItem from "./ToDoItem";
-import "./ToDoList"
-import Logo from "../assets/logo192.png";
-import {Label} from "semantic-ui-react";
 import ToDoList from "./ToDoList";
+import CreateToDoItem from "./CreateToDoItem";
+import Logo from "../assets/logo192.png";
 
 function ToDoApp() {
   const [tasks, setTasks] = useState([]);
@@ -48,6 +47,7 @@ function ToDoApp() {
       await createNewToDoItem();
     }
   }
+
   const changeItem = async(id, checked) => {
     const response = await fetch(`http://localhost:4000/api/task/${id}`, {
       method: 'PATCH',
@@ -91,18 +91,11 @@ function ToDoApp() {
           renderItem={(item) => <ToDoItem item={item} changeItem={changeItem} deleteItem={deleteItem} />}
         />
 
-        <div className="ToDoInput">
+        <CreateToDoItem
+            createNewToDoItem={createNewToDoItem} handleInput={handleInput} handleKeyPress={handleKeyPress}
+            showError={showError} toDo={toDo}
+        />
 
-          <input placeholder="Task" className="ToDoItem-Input" type="text" value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
-          { showError &&
-            <Label basic color='red' pointing="left">
-              Please enter a value
-            </Label>
-          }
-          <button className="ToDo-Add" onClick={createNewToDoItem}>
-            +
-          </button>
-        </div>
       </div>
     </div>
   );
