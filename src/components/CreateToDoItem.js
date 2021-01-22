@@ -7,15 +7,18 @@ const CreateToDoItem = (props) => {
   return (
         <div className="ToDoInput">
 
-          <input placeholder="Task" className="ToDoItem-Input" type="text" value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
+          <input placeholder="Task" className="ToDoItem-Input" type="text"
+                 value={toDo} onChange={handleInput} onKeyPress={handleKeyPress} />
           { showError &&
-            <Label basic color='red' pointing="left">
-              Please enter a value
-            </Label>
+                <Label basic color='red' pointing="left">
+                  Please enter a value
+                </Label>
           }
+
           <button className="ToDo-Add" onClick={createNewToDoItem}>
             +
           </button>
+
         </div>
   );
 };
